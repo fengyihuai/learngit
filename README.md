@@ -36,7 +36,23 @@
     cat readme.txt  # 捉取readme.txt内容
     git diff HEAD -- readme.txt # 查看工作区和版本库里面最新版本的区别
 
-注意事项：git add与git commmit需要紧接着执行
+注意事项：第一次修改 -> git add -> 第二次修改 -> git add -> git commit，防止第二次修改未提交
+
+### [撤销修改](https://www.liaoxuefeng.com/wiki/896043488029600/897889638509536)
+
+    # 场景1：仍在工作区
+    git checkout -- file    # 撤销工作区的修改
+    # 场景2：已提交到暂存区
+    git add file
+    git reset HEAD <file>   # 撤销暂存区的修改（unstage）
+    git checkout -- file    # 撤销工作区修改
+    # 场景3：提交到版本库但未推送到远程库
+    # 参考“版本回退”小节
+
+注意事项：
+1. 命令git checkout -- readme.txt会将readme.txt文件在工作区的修改全部撤销，此处分两种情况：(a) readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；(b) readme.txt已经添加到暂存区后，又作了修改，若撤销修改就回到添加到暂存区后的状态，即让这个文件回到最近一次git commit或git add时的状态
+2. git checkout -- file命令中的--很重要，没有--，就变成了“切换到另一个分支”的命令
+
 
 ## [远程仓库](https://www.liaoxuefeng.com/wiki/896043488029600/896954117292416)
 
@@ -59,7 +75,8 @@
 
 注意事项：
 1. 第一次推送master分支时，若加上了-u参数，Git在将本地的master分支内容推送的远程新的master分支同时，额外关联本地的master分支和远程的master，在后续的推送或者拉取中就可以简化命令，master分支为默认推送目标
-2. SSH警告 当你第一次使用Git的clone或者push命令连接GitHub时，会得到一个警告：  
+2. SSH警告 当你第一次使用Git的clone或者push命令连接GitHub时，会得到一个警告：
+  
 >The authenticity of host 'github.com (xx.xx.xx.xx)' can't be established.  
 >RSA key fingerprint is xx.xx.xx.xx.xx.  
 >Are you sure you want to continue connecting (yes/no)?  
