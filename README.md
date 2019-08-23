@@ -27,7 +27,9 @@
 ![resp_1](images/resp_1.jpg)
 
     git status  # 查看状态
-
+    git add .   # 添加所有未更新文件
+    git commit -m "understand how stage works"
+    git status  # 工作区是否“干净”
 
 ## [远程仓库](https://www.liaoxuefeng.com/wiki/896043488029600/896954117292416)
 
