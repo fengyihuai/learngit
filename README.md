@@ -24,9 +24,7 @@
 
 工作区（含有.git的当前目录）->stage（暂存区）->master（分支）
 
-
-
-
+![resp_1](images/resp_1.jpg)
 
     git status  # 查看状态
 
@@ -36,11 +34,12 @@
 - 本地Git仓库<->GitHub<->第三方
 - 本地Git仓库和GitHub仓库由SSH加密传输
 '''
-ssh-keygen -t rsa -C "youremail@example.com"
-...一直回车
+    ssh-keygen -t rsa -C "youremail@example.com"
+    ...一直回车
 '''
 -  SSH Key密钥对：id_rsa（私钥，不可泄露）和id_rsa.pub（公钥）
 -  GitHub->“Account settings”->“SSH Keys”->“Add SSH Key”->填上任意Title->Key文本框里粘贴id_rsa.pub文件的内容
+-  原文更正：[GitHub 重磅更新：无限私有仓库免费使用](https://www.infoq.cn/article/aKm94Aw1RmDL_9Gysm8D)
 
 
 ### 添加远程库（https://www.liaoxuefeng.com/wiki/896043488029600/898732864121440#0）
