@@ -31,6 +31,13 @@
     git commit -m "understand how stage works"
     git status  # 工作区是否“干净”
 
+### [管理修改](https://www.liaoxuefeng.com/wiki/896043488029600/897884457270432)
+
+    cat readme.txt  # 捉取readme.txt内容
+    git diff HEAD -- readme.txt # 查看工作区和版本库里面最新版本的区别
+
+注意事项：git add与git commmit需要紧接着执行
+
 ## [远程仓库](https://www.liaoxuefeng.com/wiki/896043488029600/896954117292416)
 
 - 本地Git仓库<->GitHub<->第三方
