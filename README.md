@@ -3,6 +3,8 @@
 - 学习参考网站：https://www.liaoxuefeng.com/wiki/896043488029600
 - 关键命令的记录和注释
 - 记录git基本原理和图表注解
+- Github目前使用稳定-2019/08/24，删减"[码云](https://www.liaoxuefeng.com/wiki/896043488029600/1163625339727712)"使用教程
+- 添加了Git Cheat Sheet的pdf文档
 
 ## [创建版本库](https://www.liaoxuefeng.com/wiki/896043488029600/896827951938304)
 
@@ -303,3 +305,69 @@
     git tag -d v0.9 # 本地删除
     git push origin :refs/tags/v0.9 # 远程删除
 
+## [使用Github](https://www.liaoxuefeng.com/wiki/896043488029600/900937935629664#0)
+
+- 在GitHub上，可以任意Fork开源仓库；
+- 自己拥有Fork后的仓库的读写权限；
+- 可以推送pull request给官方仓库来贡献代码，对方决定是否接受你的pull request
+
+![fork](images/fork.png)
+
+## [自定义Git](https://www.liaoxuefeng.com/wiki/896043488029600/900785521032192)
+
+    git config --global color.ui true   # 命令彩色显示
+
+### [忽略特殊文件](https://www.liaoxuefeng.com/wiki/896043488029600/900004590234208)
+
+- 创建一个特殊的.gitignore文件，忽略不需要track的文件
+- .gitignore文件模板：https://github.com/github/gitignore
+- 忽略文件的原则：
+    1. 忽略操作系统自动生成的文件，比如缩略图等；
+    2. 忽略编译生成的中间文件、可执行文件等，也就是如果一个文件是通过另一个文件自动生成的，那自动生成的文件就没必要放进版本库，比如Java编译产生的.class文件
+    3. 忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件
+- .gitignore的标准：git status命令后是否提示working directory clean
+
+        # .gitignore
+        # Windows: *.db-隐藏的缩略图文件（在有图片的目录下生成），Desktop.ini有自定义目录
+        Thumbs.db
+        ehthumbs.db
+        Desktop.ini
+
+        # Python:
+        *.py[cod]
+        *.so
+        *.egg
+        *.egg-info
+        dist
+        build
+
+        # My configurations:
+        db.ini
+        deploy_key_rsa
+
+其它命令：
+        
+        git add -f App.class    # 强制添加文件到git，即使在.gitignore规则中忽略
+        git check-ignore -v App.class   # 检查.gitignore规则问题
+
+### [配置别名](https://www.liaoxuefeng.com/wiki/896043488029600/898732837407424)
+
+    git config --global alias.st status # 配置st为status的别名
+    git st
+    git config --global alias.co checkout   # co表示checkout
+    git config --global alias.ci commit # ci表示commit
+    git config --global alias.br branch # br表示branch
+    git config --global alias.unstage 'reset HEAD'  # unstage表示reset HEAD
+    git config --global alias.last 'log -1' # 显示最后一次提交命令
+    git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"  # 更好的显示历史分支
+    # 配置Git的时候，加上--global是针对当前用户起作用的，如果不加，那只针对当前的仓库起作用
+    cat .git/config # 每个仓库的Git配置文件都放在.git/config文件
+    # 别名就在[alias]后面，要删除别名，直接把对应的行删掉即可
+    # 当前用户的Git配置文件放在用户主目录下的一个隐藏文件.gitconfig
+    cd ~    # windows系统下返回主目录
+    cat .gitconfig
+    # 配置别名也可以直接修改这个文件，如果改错了，可以删掉文件重新通过命令配置  
+
+### [搭建Git服务器](https://www.liaoxuefeng.com/wiki/896043488029600/899998870925664)
+
+详细请访问标题网址
