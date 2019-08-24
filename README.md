@@ -259,10 +259,47 @@
 ### [Rebase](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
 
 - 多人在同一个分支上协作时，很容易出现冲突，每次都需要捉取后才能推送
-- 仓库分支纷繁杂乱
+- 仓库分支纷繁杂乱，不雅观
 
         git merge --no-ff -m "merge branch dev" dev # 合并dev分支到master分支
         git log --graph --pretty=oneline --abbrev-commit    # 推荐使用第三方git graph插件
         # 发现远程分支比本地分支少x个commits
         git push origin master  # 推送本地分支
         # 如果失败并显示有人先于我们推送了远程分支，则需要git pull
+        # 提交之前可以用git rebase：把分叉的提交历史“整理”成一条直线，但本地的分叉提交会被修改
+
+    注意事项：
+    1. rebase操作可以把本地未push的分叉提交历史整理成直线
+    2. rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比
+
+## [标签管理](https://www.liaoxuefeng.com/wiki/896043488029600/900788941487552)
+
+- Git的标签（tag）虽然是版本库的快照，但实质是指向某个commit的指针
+- Git的标签通常与某个commit绑在一起，如："v1.2"对应"6a5819e..."
+
+### [创建标签](https://www.liaoxuefeng.com/wiki/896043488029600/902335212905824)
+
+    # 切换到需要打标签的分支
+    git branch 
+    git checkout master
+    git tag v1.0    # 打上标签
+    git tag # 查看所有标签
+    # 默认标签是打在最新提交的commit上，也可在特定commit打上标签
+    git log --pretty=oneline --abbrev-commit    # 查找commit号
+    git tag v0.9 <commit-id>  # 打上标签
+    git tag # 查看标签，标签不按时间顺序列出
+    git show v0.9   # 查看特定标签信息
+    git tag -a v0.1 -m "version 0.1 released" <commit-id>   # -a指定标签名，-m指定说明文字
+    git show v0.1   # 看到说明文字
+
+注意事项：标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签
+
+### [操作标签]()
+
+    git tag -d v0.1 # 删除标签
+    git push origin v1.0    # 推送标签到远程
+    git push origin --tags  # 推送全部尚未推送到远程的本地标签
+    # 若标签已经推送到远程但需要删除标签
+    git tag -d v0.9 # 本地删除
+    git push origin :refs/tags/v0.9 # 远程删除
+
