@@ -193,3 +193,17 @@
 
 ### [Feature分支](https://www.liaoxuefeng.com/wiki/896043488029600/900394246995648)
 
+每添加一个新功能，最好新建一个feature分支,完成后，合并，最后，删除该feature分支
+
+    git checkout -b feature-vulcan
+    git add vulcan.py
+    git status
+    git commit -m "add feature vulcan"
+	git checkout dev    # 切换回dev分支准备合并
+    # 临时取消该功能，需要删除分支
+    git branch -d feature-vulcan    
+    # Git提示：feature-vulcan分支还没有被合并，如果删除，将丢失掉修改，如果要强行删除，需要使用大写的-D参数
+    git branch -D feature-vulcan
+
+### [多人协作](https://www.liaoxuefeng.com/wiki/896043488029600/900375748016320)
+
