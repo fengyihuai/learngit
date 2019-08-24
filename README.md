@@ -182,5 +182,14 @@
     git stash pop   # 恢复并同时删除stash内容
     # git stash apply   # 恢复stash内容
     # git stash drop    # 删除stash内容
+    # master分支上修复的bug复制到dev分支
+    git branch
+    git cherry-pick 344edfda    # 复制"fix bug 101"所做的修改
 
+注意事项：
+1. 通过创建新的bug分支进行master分支的bug修复，完毕后合并并删除该分支；
+2. 突发任务状态下，先将当前工作现场存储（git stash），再去修复bug，完成后是使用git stash pop恢复原先工作现场；
+3. 在master分支上修复的bug，如需要合并到当前dev分支，可使用git cherry-pick <commit>命令，把bug提交的修改“复制”到当前分支，避免重复劳动
+
+### [Feature分支](https://www.liaoxuefeng.com/wiki/896043488029600/900394246995648)
 
