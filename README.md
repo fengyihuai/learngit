@@ -106,7 +106,7 @@
 
 假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了50%的代码->创建了一个属于你自己的分支->继续提交，直到开发完毕后->一次性合并到原来的分支上，既安全，又不影响别人工作
 
-### [创建于合并分支](https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424)
+### [创建与合并分支](https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424)
 
 ![branch](images/branch.png)
 
@@ -207,3 +207,60 @@
 
 ### [多人协作](https://www.liaoxuefeng.com/wiki/896043488029600/900375748016320)
 
+- 推送分支
+
+        git remote  # 查看远程库的信息
+        git remote -v   # 查看详细的远程库信息
+        git push origin master  # 指定master分支推送到远程库origin分支
+        # git push origin dev # 指定dev分支推送到远程库origin分支
+
+    注意事项：
+    1. master分支是主分支，因此要时刻与远程同步；
+    2. dev分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
+    3. bug分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；
+    4. feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发
+
+- 捉取分支
+
+        # 协同开发者B
+        git clone https://github.com/fengyihuai/learngit.git
+        cd leargit
+        git branch  # 发现只有master分支
+        git checkout -b dev origin/dev  # 创建本地dev分支
+        # 新增env.txt文件
+        git add env.txt
+        git commit -m "add env"
+        # 协同开发者A
+        # dev分支新建并修改env.txt文件：env
+        cat env.txt
+        git commit -m "add new env"
+        git push origin dev
+        # 推送失败，需要捉取最新提交
+        git pull
+        # 若git pull失败，需指定指定本地dev分支与远程origin/dev分支的链接
+        git branch --set-upstream-to=origin/dev dev
+        git push origin dev
+        git pull
+        # 合并有冲突,但出现与教程不同的信息
+        # Auto-merging env.txt
+        # Merge made by the 'recursive' strategy.
+        # git commit -m "fix env conflict"	# 此处无作用
+        git push origin dev
+
+    多人协作的工作模式：
+
+    1. 可以试图用git push origin <branch-name>推送自己的修改  
+    2. 如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并  
+    3. 如果合并有冲突，则解决冲突，并在本地提交  
+    4. 没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功  
+
+    git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>
+
+### [Rebase](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
+
+- 多人在同一个分支上协作时，很容易出现冲突，每次都需要捉取后才能推送
+- 仓库分支纷繁杂乱
+
+        git merge --no-ff -m "merge branch dev" dev # 合并dev分支到master分支
+        git log --graph --pretty=oneline --abbrev-commit    # 推荐使用第三方git graph插件
+        # 发现远程分支
