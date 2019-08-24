@@ -263,4 +263,6 @@
 
         git merge --no-ff -m "merge branch dev" dev # 合并dev分支到master分支
         git log --graph --pretty=oneline --abbrev-commit    # 推荐使用第三方git graph插件
-        # 发现远程分支
+        # 发现远程分支比本地分支少x个commits
+        git push origin master  # 推送本地分支
+        # 如果失败并显示有人先于我们推送了远程分支，则需要git pull
